@@ -40,7 +40,7 @@ export const PreWrapper = styled.div`
 export const PreNameMobile = styled.pre`
   margin-top: 0.5rem;
   margin-bottom: 1.5rem;
-  font-size: 0.7rem;
+  font-size: 0.58rem;
   white-space: pre;
   overflow-x: hidden;
 
@@ -72,7 +72,7 @@ const flicker = keyframes`
 export const PreImg = styled.pre<ThemeType>`
   color: ${({ theme }) => theme.colors?.primary};
   animation: ${flicker} 4s infinite;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
 
   @media (max-width: 550px) {
     display: none;
@@ -82,7 +82,7 @@ export const PreImg = styled.pre<ThemeType>`
 export const PreImgMobile = styled.pre<ThemeType>`
   color: ${({ theme }) => theme.colors?.primary};
   animation: ${flicker} 4s infinite;
-  font-size: 0.55rem;
+  font-size: 0.45rem;
   white-space: pre;
   overflow-x: hidden;
   max-width: 100%;
