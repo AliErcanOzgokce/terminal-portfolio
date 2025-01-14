@@ -20,3 +20,8 @@ declare module "styled-components" {
     };
   }
 }
+
+declare module "*.mp3" {
+  const src: string;
+  export default src;
+}

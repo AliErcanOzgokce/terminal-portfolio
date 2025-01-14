@@ -1,29 +1,69 @@
 import {
   Cmd,
-  CmdDesc,
-  CmdList,
-  HelpWrapper,
-  KeyContainer,
+  // CmdDesc,
+  // CmdList,
+  // HelpWrapper,
+  // KeyContainer,
+  Title,
+  Row,
+  TabSpace,
+  Description,
+  Seperator,
+  Key,
 } from "../styles/Help.styled";
 import { commands } from "../Terminal";
-import { generateTabs } from "../../utils/funcs";
 
 const Help: React.FC = () => {
   return (
-    <HelpWrapper data-testid="help">
-      {commands.map(({ cmd, desc, tab }) => (
-        <CmdList key={cmd}>
-          <Cmd>{cmd}</Cmd>
-          {generateTabs(tab)}
-          <CmdDesc>- {desc}</CmdDesc>
-        </CmdList>
-      ))}
-      <KeyContainer>
-        <div>Tab or Ctrl + i&nbsp; =&gt; autocompletes the command</div>
-        <div>Up Arrow {generateTabs(5)} =&gt; go back to previous command</div>
-        <div>Ctrl + l {generateTabs(5)} =&gt; clear the terminal</div>
-      </KeyContainer>
-    </HelpWrapper>
+    <div>
+      <div>
+        <Title>BID.Terminal Commands:</Title>
+        {commands
+          .filter(cmd => cmd.category === "bid")
+          .map(({ cmd, desc, tab }) => (
+            <Row key={cmd}>
+              <Cmd>{cmd}</Cmd>
+              <TabSpace tab={tab} />
+              <Description>{desc}</Description>
+            </Row>
+          ))}
+      </div>
+
+      <Seperator>----</Seperator>
+
+      <div>
+        <Title>System Commands:</Title>
+        {commands
+          .filter(cmd => cmd.category === "system")
+          .map(({ cmd, desc, tab }) => (
+            <Row key={cmd}>
+              <Cmd>{cmd}</Cmd>
+              <TabSpace tab={tab} />
+              <Description>{desc}</Description>
+            </Row>
+          ))}
+      </div>
+
+      <Seperator>----</Seperator>
+
+      <div>
+        <Row>
+          <Key>Tab or Ctrl + i</Key>
+          <TabSpace tab={3} />
+          <Description>autocompletes the command</Description>
+        </Row>
+        <Row>
+          <Key>Up Arrow</Key>
+          <TabSpace tab={6} />
+          <Description>go back to previous command</Description>
+        </Row>
+        <Row>
+          <Key>Ctrl + l</Key>
+          <TabSpace tab={7} />
+          <Description>clear the terminal</Description>
+        </Row>
+      </div>
+    </div>
   );
 };
 

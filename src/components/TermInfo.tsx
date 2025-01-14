@@ -1,9 +1,12 @@
 import { User, WebsiteName, Wrapper } from "./styles/TerminalInfo.styled";
+import { TerminalPrompt } from "./styles/Terminal.styled";
 
 const TermInfo = () => {
   return (
     <Wrapper>
-      <User>visitor</User>@<WebsiteName>terminal.satnaing.dev</WebsiteName>:~$
+      <TerminalPrompt>
+        <User>agent</User>@<WebsiteName>bid.terminal</WebsiteName>:~$
+      </TerminalPrompt>
     </Wrapper>
   );
 };

@@ -5,32 +5,42 @@ export const HelpWrapper = styled.div`
   margin-bottom: 0.75rem;
 `;
 
-export const CmdList = styled.div`
-  margin-bottom: 0.25rem;
+export const Title = styled.div`
+  color: ${({ theme }) => theme.colors?.primary};
+  margin-bottom: 1rem;
+  font-weight: bold;
+`;
+
+export const Row = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
 `;
 
 export const Cmd = styled.span`
   color: ${({ theme }) => theme.colors?.primary};
+  text-shadow: 0 0 7px ${({ theme }) => theme.colors?.primary},
+    0 0 10px ${({ theme }) => theme.colors?.primary},
+    0 0 21px ${({ theme }) => theme.colors?.primary};
 `;
 
-export const CmdDesc = styled.span`
-  color: ${({ theme }) => theme.colors?.text[200]};
-  margin-bottom: 0.75rem;
-
-  @media (max-width: 550px) {
-    display: block;
-  }
+export const Description = styled.span`
+  color: ${({ theme }) => theme.colors?.secondary};
+  text-shadow: 0 0 7px ${({ theme }) => theme.colors?.secondary},
+    0 0 10px ${({ theme }) => theme.colors?.secondary};
 `;
 
-export const KeyContainer = styled.div`
-  font-size: 0.875rem;
-  margin-top: 1rem;
+export const Key = styled.span`
+  color: ${({ theme }) => theme.colors?.primary};
+  text-shadow: 0 0 7px ${({ theme }) => theme.colors?.primary},
+    0 0 10px ${({ theme }) => theme.colors?.primary};
+`;
 
-  @media (max-width: 550px) {
-    display: none;
-  }
+export const TabSpace = styled.span<{ tab: number }>`
+  margin-left: ${({ tab }) => tab * 0.5}rem;
+`;
 
-  div {
-    margin-top: 0.25rem;
-  }
+export const Seperator = styled.div`
+  color: ${({ theme }) => theme.colors?.primary};
+  margin: 1rem 0;
 `;

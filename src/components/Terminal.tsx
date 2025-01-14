@@ -24,23 +24,25 @@ type Command = {
   cmd: string;
   desc: string;
   tab: number;
+  category: string;
 }[];
 
 export const commands: Command = [
-  { cmd: "about", desc: "about Sat Naing", tab: 8 },
-  { cmd: "clear", desc: "clear the terminal", tab: 8 },
-  { cmd: "echo", desc: "print out anything", tab: 9 },
-  { cmd: "education", desc: "my education background", tab: 4 },
-  { cmd: "email", desc: "send an email to me", tab: 8 },
-  { cmd: "gui", desc: "go to my portfolio in GUI", tab: 10 },
-  { cmd: "help", desc: "check available commands", tab: 9 },
-  { cmd: "history", desc: "view command history", tab: 6 },
-  { cmd: "projects", desc: "view projects that I've coded", tab: 5 },
-  { cmd: "pwd", desc: "print current working directory", tab: 10 },
-  { cmd: "socials", desc: "check out my social accounts", tab: 6 },
-  { cmd: "themes", desc: "check available themes", tab: 7 },
-  { cmd: "welcome", desc: "display hero section", tab: 6 },
-  { cmd: "whoami", desc: "about current user", tab: 7 },
+  // System Commands
+  { cmd: "clear", desc: "clear the terminal", tab: 8, category: "system" },
+  { cmd: "echo", desc: "print out anything", tab: 9, category: "system" },
+  { cmd: "help", desc: "check available commands", tab: 9, category: "system" },
+  { cmd: "history", desc: "view command history", tab: 6, category: "system" },
+  { cmd: "pwd", desc: "print working directory", tab: 10, category: "system" },
+  { cmd: "welcome", desc: "display hero section", tab: 6, category: "system" },
+  { cmd: "whoami", desc: "about current user", tab: 7, category: "system" },
+  { cmd: "music", desc: "control music (on/off)", tab: 8, category: "system" },
+
+  // BID.Terminal Commands
+  { cmd: "about", desc: "about Creator Bid", tab: 8, category: "bid" },
+  { cmd: "top", desc: "get top coins info", tab: 10, category: "bid" },
+  { cmd: "trade", desc: "trade bid.terminal", tab: 8, category: "bid" },
+  { cmd: "twitter", desc: "bidterminal twitter", tab: 7, category: "bid" },
 ];
 
 type Term = {
@@ -78,7 +80,7 @@ const Terminal = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setCmdHistory([inputVal, ...cmdHistory]);
+    setCmdHistory([...cmdHistory, inputVal]);
     setInputVal("");
     setRerender(true);
     setHints([]);
@@ -188,6 +190,42 @@ const Terminal = () => {
           ))}
         </div>
       )}
+
+      {cmdHistory.map((cmdH, index) => {
+        const commandArray = _.split(_.trim(cmdH), " ");
+        const validCommand = _.find(commands, { cmd: commandArray[0] });
+        const contextValue = {
+          arg: _.drop(commandArray),
+          history: cmdHistory,
+          rerender,
+          index,
+          clearHistory,
+        };
+        return (
+          <div key={_.uniqueId(`${cmdH}_`)}>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <TermInfo />
+              <MobileBr />
+              <MobileSpan>&#62;</MobileSpan>
+              <span style={{ marginLeft: "8px" }} data-testid="input-command">
+                {cmdH}
+              </span>
+            </div>
+            {validCommand ? (
+              <termContext.Provider value={contextValue}>
+                <Output index={index} cmd={commandArray[0]} />
+              </termContext.Provider>
+            ) : cmdH === "" ? (
+              <Empty />
+            ) : (
+              <CmdNotFound data-testid={`not-found-${index}`}>
+                command not found: {cmdH}
+              </CmdNotFound>
+            )}
+          </div>
+        );
+      })}
+
       <Form onSubmit={handleSubmit}>
         <label htmlFor="terminal-input">
           <TermInfo /> <MobileBr />
@@ -207,39 +245,6 @@ const Terminal = () => {
           onChange={handleChange}
         />
       </Form>
-
-      {cmdHistory.map((cmdH, index) => {
-        const commandArray = _.split(_.trim(cmdH), " ");
-        const validCommand = _.find(commands, { cmd: commandArray[0] });
-        const contextValue = {
-          arg: _.drop(commandArray),
-          history: cmdHistory,
-          rerender,
-          index,
-          clearHistory,
-        };
-        return (
-          <div key={_.uniqueId(`${cmdH}_`)}>
-            <div>
-              <TermInfo />
-              <MobileBr />
-              <MobileSpan>&#62;</MobileSpan>
-              <span data-testid="input-command">{cmdH}</span>
-            </div>
-            {validCommand ? (
-              <termContext.Provider value={contextValue}>
-                <Output index={index} cmd={commandArray[0]} />
-              </termContext.Provider>
-            ) : cmdH === "" ? (
-              <Empty />
-            ) : (
-              <CmdNotFound data-testid={`not-found-${index}`}>
-                command not found: {cmdH}
-              </CmdNotFound>
-            )}
-          </div>
-        );
-      })}
     </Wrapper>
   );
 };

@@ -3,10 +3,13 @@ import {
   HeroContainer,
   Link,
   PreImg,
+  PreImgMobile,
   PreName,
   PreNameMobile,
   PreWrapper,
   Seperator,
+  PurpleSpan,
+  Spacer,
 } from "../styles/Welcome.styled";
 
 const Welcome: React.FC = () => {
@@ -14,67 +17,116 @@ const Welcome: React.FC = () => {
     <HeroContainer data-testid="welcome">
       <div className="info-section">
         <PreName>
-          {`        
-    _____       __     _   __      _            
-   / ___/____ _/ /_   / | / /___ _(_)___  ____ _
-   \\__ \\/ __ \`/ __/  /  |/ / __ \`/ / __  / __ \`/
-  ___/ / /_/ / /_   / /|  / /_/ / / / / / /_/ / 
- /____/\\__,_/\\___/ /_/ |_/\\__,_/_/_/ /_/\\__, /  
-                                       /____/   
+          {` 
+ __     __     __      __                           __                __ 
+|  |--.|__|.--|  |    |  |_ .-----..----..--------.|__|.-----..---.-.|  |
+|  _  ||  ||  _  | __ |   _||  -__||   _||        ||  ||     ||  _  ||  |
+|_____||__||_____||__||____||_____||__|  |__|__|__||__||__|__||___._||__|
+                                                                     
           `}
         </PreName>
         <PreWrapper>
           <PreNameMobile>
-            {`
-    ____     __          
-   / __/__ _/ /_         
-  _\\ \\/ _ \`/ __/         
- /___/\\_,_/\\__/          
-    _  __     _          
-   / |/ /__ _(_)__  ___ _
-  /    / _ \`/ / _ \\/ _ \`/
- /_/|_/\\_,_/_/_//_/\\_, / 
-                  /___/  
- 
+            {`  
+ __     __     __      __   
+|  |--.|__|.--|  |    |  |_ 
+|  _  ||  ||  _  | __ |   _|
+|_____||__||_____||__||____|
           `}
           </PreNameMobile>
         </PreWrapper>
-        <div>Welcome to my terminal portfolio. (Version 1.3.1)</div>
-        <Seperator>----</Seperator>
         <div>
-          This project's source code can be found in this project's{" "}
-          <Link href="https://github.com/satnaing/terminal-portfolio">
-            GitHub repo
+          Welcome to BID.Terminal - The Cyberpunk Trading Interface
+          <Seperator>----</Seperator>
+          Creator.BID Token's Official Terminal Interface. Built for degens, by
+          degens.
+          <Seperator>----</Seperator>
+          Join the revolution:{" "}
+          <Link
+            href="https://twitter.com/bidterminal"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Twitter
+          </Link>{" "}
+          |{" "}
+          <Link
+            href="https://creator.bid"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Creator.BID
+          </Link>
+          <Seperator>----</Seperator>
+          "Let me tell you why you're here... <Spacer /> You're here because you
+          know something. <Spacer />
+          What you know you can't explain, but you feel it."
+          <Seperator>----</Seperator>
+          Type `<Cmd>help</Cmd>` to start hacking with{" "}
+          <Link
+            href="https://creator.bid/agents/67449f1e853e3027a53168a2"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Agent Algo
           </Link>
           .
-        </div>
-        <Seperator>----</Seperator>
-        <div>
-          For a list of available commands, type `<Cmd>help</Cmd>`.
+          <Spacer />
         </div>
       </div>
       <div className="illu-section">
         <PreImg>
           {`
-                       ,##,,eew,
-                     ,##############C
-                  a###############@##
-                 7####^\`^"7W7^"@####
-                 @#@b\`         ^@#@^
-                  ##^,,,,   ,,,,^#^
-                 ,,@######"#######=
-                  .''555"\` '5555b|
-                  T"@  ,,,^,mg,@,*
-                     %p||\`~~'.#\`
-                      ^Wp  ,#T
-                     :b''@@b^}
-                  ,^     \` 'b 3-
-              .<\` 'p   ^v   #   b   *.
-            {      }   #"GpGb   [
-            C      3 * @#######Nl      \`
-           '            ^@##b     ($    !
-         `}
+                        ,##,,ee
+                      ,#########
+                   a###############@
+                 ^v7####^\`^"7W7^"@####
+               &2w@#@b\`         ^@#@^#4?
+                   ##^`}
+          <PurpleSpan>,,,, ,,,,</PurpleSpan>
+          {`^#^
+                  `}
+          <PurpleSpan>,,@######"#######=</PurpleSpan>
+          {`
+                   `}
+          .<PurpleSpan>''555"\` '5555</PurpleSpan>b|
+          {`
+                   T"@  ,,,^,mg,@,*
+                      %p||\`~~'.#\`
+                       ^Wp  ,#T
+                      :b''@@b^}
+                   ,^     \` 'b 3-
+               .<\` 'p   ^v   #   b   *.
+             {      }   #"GpGb   [
+             C      3 * @#######Nl      \`
+            '            ^@##b     ($    !`}
         </PreImg>
+        <PreImgMobile>
+          {`
+                                  ,##,,ee
+                                ,#########
+                            a###############@
+                          ^v7####^\`^"7W7^"@####
+                        &2w@#@b\`         ^@#@^#4?
+                            ##^`}
+          <PurpleSpan>,,,, ,,,,</PurpleSpan>
+          {`^#^
+                            `}
+          <PurpleSpan>,,@######"#######=</PurpleSpan>
+          {`
+                            `}
+          .<PurpleSpan>''555"\` '5555</PurpleSpan>b|
+          {`
+                            T"@  ,,,^,mg,@,*
+                                %p||\`~~'.#\`
+                                ^Wp  ,#T
+                                :b''@@b^}
+                            ,^     \` 'b 3-
+                        .<\` 'p   ^v   #   b   *.
+                      {      }   #"GpGb   [
+                      C      3 * @#######Nl      \`
+                      '            ^@##b     ($    !`}
+        </PreImgMobile>
       </div>
     </HeroContainer>
   );

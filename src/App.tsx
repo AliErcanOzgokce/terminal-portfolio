@@ -1,8 +1,10 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useRef } from "react";
 import { DefaultTheme, ThemeProvider } from "styled-components";
 import { useTheme } from "./hooks/useTheme";
 import GlobalStyle from "./components/styles/GlobalStyle";
 import Terminal from "./components/Terminal";
+import LoadingScreen from "./components/LoadingScreen";
+import backgroundMusic from "/src/assets/background.mp3";
 
 export const themeContext = createContext<
   ((switchTheme: DefaultTheme) => void) | null
@@ -12,9 +14,17 @@ function App() {
   // themes
   const { theme, themeLoaded, setMode } = useTheme();
   const [selectedTheme, setSelectedTheme] = useState(theme);
+  const [isLoading, setIsLoading] = useState(true);
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  // Loading screen
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 10000); // 12 saniye olarak güncelledik (tüm animasyonun tamamlanması için)
+  }, []);
 
   // Disable browser's default behavior
-  // to prevent the page go up when Up Arrow is pressed
   useEffect(() => {
     window.addEventListener(
       "keydown",
@@ -49,17 +59,63 @@ function App() {
     setMode(switchTheme);
   };
 
+  // Müzik kontrolü için useEffect
+  useEffect(() => {
+    const startAudio = () => {
+      if (audioRef.current) {
+        audioRef.current.volume = 0.3;
+        audioRef.current.play();
+      }
+    };
+
+    // Sayfa yüklendiğinde müziği başlat
+    startAudio();
+
+    // Müziğin durması durumunda tekrar başlat
+    const handleVisibilityChange = () => {
+      if (!document.hidden) {
+        startAudio();
+      }
+    };
+
+    // Sekme değiştiğinde müziği kontrol et
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    // Kullanıcı etkileşiminde müziği başlat
+    const handleInteraction = () => {
+      startAudio();
+      document.removeEventListener("click", handleInteraction);
+      document.removeEventListener("keydown", handleInteraction);
+    };
+
+    document.addEventListener("click", handleInteraction);
+    document.addEventListener("keydown", handleInteraction);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      document.removeEventListener("click", handleInteraction);
+      document.removeEventListener("keydown", handleInteraction);
+    };
+  }, []);
+
   return (
     <>
       <h1 className="sr-only" aria-label="Terminal Portfolio">
         Terminal Portfolio
       </h1>
+      <audio ref={audioRef} loop>
+        <source src={backgroundMusic} type="audio/mp3" />
+      </audio>
       {themeLoaded && (
         <ThemeProvider theme={selectedTheme}>
           <GlobalStyle />
-          <themeContext.Provider value={themeSwitcher}>
-            <Terminal />
-          </themeContext.Provider>
+          {isLoading ? (
+            <LoadingScreen />
+          ) : (
+            <themeContext.Provider value={themeSwitcher}>
+              <Terminal />
+            </themeContext.Provider>
+          )}
         </ThemeProvider>
       )}
     </>

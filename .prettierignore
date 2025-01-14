@@ -9,3 +9,6 @@
 !package.json
 !.prettierrc
 !.eslintrc.json
+
+# Ignore binary files
+**/*.mp3
