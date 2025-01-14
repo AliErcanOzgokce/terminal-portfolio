@@ -23,13 +23,13 @@ export const LoadingWrapper = styled.div`
 
 export const LoadingText = styled.div`
   font-family: "Courier New", Courier, monospace;
-  font-size: 1.2rem;
+  font-size: 1rem;
   margin-top: 2rem;
 `;
 
 export const HackerText = styled.div`
   font-family: "Courier New", Courier, monospace;
-  font-size: 0.8rem;
+  font-size: 0.6rem;
   opacity: 0.5;
   position: absolute;
   top: 0;
