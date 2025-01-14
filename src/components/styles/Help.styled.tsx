@@ -9,14 +9,12 @@ export const Title = styled.div`
   color: ${({ theme }) => theme.colors?.primary};
   margin-bottom: 1rem;
   font-weight: bold;
-  font-size: 0.9rem;
 `;
 
 export const Row = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 0.5rem;
-  font-size: 0.85rem;
 `;
 
 export const Cmd = styled.span`
@@ -24,21 +22,18 @@ export const Cmd = styled.span`
   text-shadow: 0 0 7px ${({ theme }) => theme.colors?.primary},
     0 0 10px ${({ theme }) => theme.colors?.primary},
     0 0 21px ${({ theme }) => theme.colors?.primary};
-  font-size: 0.85rem;
 `;
 
 export const Description = styled.span`
   color: ${({ theme }) => theme.colors?.secondary};
   text-shadow: 0 0 7px ${({ theme }) => theme.colors?.secondary},
     0 0 10px ${({ theme }) => theme.colors?.secondary};
-  font-size: 0.85rem;
 `;
 
 export const Key = styled.span`
   color: ${({ theme }) => theme.colors?.primary};
   text-shadow: 0 0 7px ${({ theme }) => theme.colors?.primary},
     0 0 10px ${({ theme }) => theme.colors?.primary};
-  font-size: 0.85rem;
 `;
 
 export const TabSpace = styled.span<{ tab: number }>`
