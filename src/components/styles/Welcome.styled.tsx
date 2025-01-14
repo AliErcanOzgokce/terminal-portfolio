@@ -27,7 +27,7 @@ export const HeroContainer = styled.div`
 export const PreName = styled.pre`
   margin-top: 0.5rem;
   margin-bottom: 1.5rem;
-  font-size: 0.7rem;
+  font-size: 0.85rem;
 
   @media (max-width: 550px) {
     display: none;
@@ -73,7 +73,7 @@ const flicker = keyframes`
 export const PreImg = styled.pre<ThemeType>`
   color: ${({ theme }) => theme.colors?.primary};
   animation: ${flicker} 4s infinite;
-  font-size: 0.7rem;
+  font-size: 0.85rem;
 
   @media (max-width: 550px) {
     display: none;
