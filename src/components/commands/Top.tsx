@@ -1,5 +1,69 @@
 import { useContext } from "react";
 import { termContext } from "../Terminal";
+import styled from "styled-components";
+
+const TableContainer = styled.div`
+  font-family: monospace;
+  overflow-x: auto;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    overflow-x: hidden;
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+`;
+
+const Row = styled.div`
+  display: flex;
+  padding: 3px 0;
+  border-bottom: 1px solid #222;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 10px 0;
+  }
+`;
+
+const HeaderRow = styled(Row)`
+  border-bottom: 1px solid #444;
+  padding: 4px 0;
+  color: #00ff00;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const Cell = styled.span<{
+  width?: string;
+  align?: string;
+  color?: string;
+  mobileLabel?: string;
+}>`
+  display: inline-block;
+  width: ${props => props.width || "auto"};
+  text-align: ${props => props.align || "left"};
+  color: ${props => props.color || "inherit"};
+
+  @media (max-width: 768px) {
+    width: 100%;
+    text-align: left;
+    padding: 2px 0;
+
+    &:before {
+      content: "${props => props.mobileLabel || ""}";
+      color: #666;
+    }
+  }
+`;
 
 const Top: React.FC = () => {
   const { topData } = useContext(termContext);
@@ -9,134 +73,70 @@ const Top: React.FC = () => {
   }
 
   return (
-    <div style={{ fontFamily: "monospace" }}>
+    <TableContainer>
       {/* Header */}
       <div style={{ marginBottom: "8px", color: "#888" }}>
         Top {topData.length} Agent Keys by Market Cap (USD)
       </div>
 
       {/* Table Header */}
-      <div
-        style={{
-          marginBottom: "8px",
-          borderBottom: "1px solid #444",
-          padding: "4px 0",
-          color: "#00ff00",
-        }}
-      >
-        <span
-          style={{ display: "inline-block", width: "45px", textAlign: "right" }}
-        >
+      <HeaderRow>
+        <Cell width="45px" align="right">
           #
-        </span>
-        <span
-          style={{
-            display: "inline-block",
-            width: "200px",
-            paddingLeft: "15px",
-          }}
-        >
+        </Cell>
+        <Cell width="200px" style={{ paddingLeft: "15px" }}>
           Name
-        </span>
-        <span
-          style={{
-            display: "inline-block",
-            width: "150px",
-            textAlign: "right",
-          }}
-        >
+        </Cell>
+        <Cell width="150px" align="right">
           Price (ETH)
-        </span>
-        <span
-          style={{
-            display: "inline-block",
-            width: "150px",
-            textAlign: "right",
-          }}
-        >
+        </Cell>
+        <Cell width="150px" align="right">
           Price (USD)
-        </span>
-        <span
-          style={{
-            display: "inline-block",
-            width: "200px",
-            textAlign: "right",
-          }}
-        >
+        </Cell>
+        <Cell width="200px" align="right">
           Market Cap (USD)
-        </span>
-      </div>
+        </Cell>
+      </HeaderRow>
 
       {/* Table Body */}
       {topData.map((coin, index) => (
-        <div
+        <Row
           key={coin.id}
-          style={{
-            padding: "3px 0",
-            borderBottom: "1px solid #222",
-            backgroundColor: index % 2 === 0 ? "#111" : "transparent",
-          }}
+          style={{ backgroundColor: index % 2 === 0 ? "#111" : "transparent" }}
         >
-          <span
-            style={{
-              display: "inline-block",
-              width: "45px",
-              textAlign: "right",
-              color: "#666",
-            }}
-          >
+          <Cell width="45px" align="right" color="#666" mobileLabel="Rank: ">
             {index + 1}
-          </span>
-          <span
-            style={{
-              display: "inline-block",
-              width: "200px",
-              paddingLeft: "15px",
-              color: index < 3 ? "#00ff00" : "inherit",
-            }}
+          </Cell>
+          <Cell
+            width="200px"
+            style={{ paddingLeft: "15px" }}
+            color={index < 3 ? "#00ff00" : "inherit"}
+            mobileLabel="Name: "
           >
             {coin.name}
-          </span>
-          <span
-            style={{
-              display: "inline-block",
-              width: "150px",
-              textAlign: "right",
-            }}
-          >
+          </Cell>
+          <Cell width="150px" align="right" mobileLabel="ETH Price: ">
             Ξ
             {Number(coin.price).toLocaleString(undefined, {
               minimumFractionDigits: 6,
               maximumFractionDigits: 6,
             })}
-          </span>
-          <span
-            style={{
-              display: "inline-block",
-              width: "150px",
-              textAlign: "right",
-            }}
-          >
+          </Cell>
+          <Cell width="150px" align="right" mobileLabel="USD Price: ">
             $
             {Number(coin.priceUSD).toLocaleString(undefined, {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             })}
-          </span>
-          <span
-            style={{
-              display: "inline-block",
-              width: "200px",
-              textAlign: "right",
-            }}
-          >
+          </Cell>
+          <Cell width="200px" align="right" mobileLabel="Market Cap: ">
             $
             {Number(coin.marketCapUSD).toLocaleString(undefined, {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             })}
-          </span>
-        </div>
+          </Cell>
+        </Row>
       ))}
 
       {/* Footer */}
@@ -151,7 +151,7 @@ const Top: React.FC = () => {
       >
         Updated at: {new Date().toLocaleTimeString()}
       </div>
-    </div>
+    </TableContainer>
   );
 };
 
