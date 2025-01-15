@@ -11,6 +11,7 @@ import Projects from "./commands/Projects";
 import Socials from "./commands/Socials";
 import Themes from "./commands/Themes";
 import Music from "./commands/Music";
+import Top from "./commands/Top";
 import { OutputContainer, UsageDiv } from "./styles/Output.styled";
 import { termContext } from "./Terminal";
 import { useContext } from "react";
@@ -23,7 +24,7 @@ type Props = {
 const Output: React.FC<Props> = ({ index, cmd }) => {
   const { arg } = useContext(termContext);
 
-  const specialCmds = ["projects", "socials", "themes", "echo", "music"];
+  const specialCmds = ["projects", "socials", "themes", "echo", "music", "top"];
 
   // return 'Usage: <cmd>' if command arg is not valid
   // eg: about tt
@@ -49,6 +50,7 @@ const Output: React.FC<Props> = ({ index, cmd }) => {
           music: <Music />,
           welcome: <Welcome />,
           whoami: <GeneralOutput>anonymous</GeneralOutput>,
+          top: <Top />,
         }[cmd]
       }
     </OutputContainer>

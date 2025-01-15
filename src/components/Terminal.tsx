@@ -37,13 +37,21 @@ export const commands: Command = [
   { cmd: "welcome", desc: "display hero section", tab: 6, category: "system" },
   { cmd: "whoami", desc: "about current user", tab: 7, category: "system" },
   { cmd: "music", desc: "control music (on/off)", tab: 8, category: "system" },
+  { cmd: "top", desc: "get top coins info", tab: 10, category: "bid" },
 
   // BID.Terminal Commands
   { cmd: "about", desc: "about Creator Bid", tab: 8, category: "bid" },
-  { cmd: "top", desc: "get top coins info", tab: 10, category: "bid" },
-  { cmd: "trade", desc: "trade bid.terminal", tab: 8, category: "bid" },
-  { cmd: "twitter", desc: "bidterminal twitter", tab: 7, category: "bid" },
 ];
+
+interface AgentKey {
+  id: string;
+  name: string;
+  creator: string;
+  totalSupply: string;
+  price: string;
+  marketCap: string;
+  createdAtBlockTimestamp: string;
+}
 
 type Term = {
   arg: string[];
@@ -51,6 +59,7 @@ type Term = {
   rerender: boolean;
   index: number;
   clearHistory?: () => void;
+  topData?: AgentKey[];
 };
 
 export const termContext = createContext<Term>({
@@ -58,6 +67,7 @@ export const termContext = createContext<Term>({
   history: [],
   rerender: false,
   index: 0,
+  topData: [],
 });
 
 const Terminal = () => {
@@ -69,6 +79,7 @@ const Terminal = () => {
   const [rerender, setRerender] = useState(false);
   const [hints, setHints] = useState<string[]>([]);
   const [pointer, setPointer] = useState(-1);
+  const [topData, setTopData] = useState<AgentKey[]>([]);
 
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,8 +89,53 @@ const Terminal = () => {
     [inputVal]
   );
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const fetchTopData = async (limit: number) => {
+    try {
+      const API_KEY = "9421affaf21b1ad617a0bdee0e3ad815";
+
+      const query = `{
+        agentKeys(first: ${limit}, orderBy: marketCap, orderDirection: desc) {
+          id
+          name
+          creator
+          totalSupply
+          price
+          marketCap
+          createdAtBlockTimestamp
+        }
+      }`;
+
+      const response = await fetch(
+        `https://gateway.thegraph.com/api/${API_KEY}/subgraphs/id/8f1XAvLcseuxGvme1EYCSCoRnpfDPa6D5jHB914gEM3L`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            query,
+            operationName: "Subgraphs",
+            variables: {},
+          }),
+        }
+      );
+
+      const data = await response.json();
+      if (data.errors) {
+        throw new Error(data.errors[0].message);
+      }
+
+      setTopData(data.data.agentKeys);
+    } catch (err) {
+      console.error("Error fetching data:", err);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const commandArray = inputVal.trim().split(" ");
+    if (commandArray[0] === "top") {
+      const limit = commandArray[1] ? parseInt(commandArray[1]) : 10;
+      await fetchTopData(limit);
+    }
     setCmdHistory([...cmdHistory, inputVal]);
     setInputVal("");
     setRerender(true);
@@ -200,6 +256,7 @@ const Terminal = () => {
           rerender,
           index,
           clearHistory,
+          topData,
         };
         return (
           <div key={_.uniqueId(`${cmdH}_`)}>

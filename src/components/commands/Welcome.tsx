@@ -22,7 +22,8 @@ const Welcome: React.FC = () => {
 |  |--.|__|.--|  |    |  |_ .-----..----..--------.|__|.-----..---.-.|  |
 |  _  ||  ||  _  | __ |   _||  -__||   _||        ||  ||     ||  _  ||  |
 |_____||__||_____||__||____||_____||__|  |__|__|__||__||__|__||___._||__|
-                                                                     
+              
+
           `}
         </PreName>
         <PreWrapper>
@@ -43,7 +44,7 @@ const Welcome: React.FC = () => {
           <Seperator>----</Seperator>
           Join the revolution:{" "}
           <Link
-            href="https://twitter.com/bidterminal"
+            href="https://x.com/TerminalBid"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -51,7 +52,7 @@ const Welcome: React.FC = () => {
           </Link>{" "}
           |{" "}
           <Link
-            href="https://creator.bid"
+            href="https://creator.bid/agents/67857c870e2b1c22e3e4890c"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -62,7 +63,8 @@ const Welcome: React.FC = () => {
           know something. <Spacer />
           What you know you can't explain, but you feel it."
           <Seperator>----</Seperator>
-          Type `<Cmd>help</Cmd>` to start hacking with{" "}
+          Type `<Cmd>help</Cmd>` to see available commands or try `
+          <Cmd>top</Cmd>` to view top agents with{" "}
           <Link
             href="https://creator.bid/agents/67449f1e853e3027a53168a2"
             target="_blank"
