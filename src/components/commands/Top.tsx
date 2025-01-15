@@ -4,13 +4,15 @@ import { termContext } from "../Terminal";
 const Top: React.FC = () => {
   const { topData } = useContext(termContext);
 
-  if (!topData || topData.length === 0) return <p>No data available</p>;
+  if (!topData || topData.length === 0) {
+    return <p>Error: No data available</p>;
+  }
 
   return (
     <div style={{ fontFamily: "monospace" }}>
       {/* Header */}
       <div style={{ marginBottom: "8px", color: "#888" }}>
-        Top {topData.length} Agent Keys by Market Cap
+        Top {topData.length} Agent Keys by Market Cap (USD)
       </div>
 
       {/* Table Header */}
@@ -43,7 +45,16 @@ const Top: React.FC = () => {
             textAlign: "right",
           }}
         >
-          Price
+          Price (ETH)
+        </span>
+        <span
+          style={{
+            display: "inline-block",
+            width: "150px",
+            textAlign: "right",
+          }}
+        >
+          Price (USD)
         </span>
         <span
           style={{
@@ -52,7 +63,7 @@ const Top: React.FC = () => {
             textAlign: "right",
           }}
         >
-          Market Cap
+          Market Cap (USD)
         </span>
       </div>
 
@@ -93,10 +104,23 @@ const Top: React.FC = () => {
               textAlign: "right",
             }}
           >
-            $
+            Ξ
             {Number(coin.price).toLocaleString(undefined, {
               minimumFractionDigits: 6,
               maximumFractionDigits: 6,
+            })}
+          </span>
+          <span
+            style={{
+              display: "inline-block",
+              width: "150px",
+              textAlign: "right",
+            }}
+          >
+            $
+            {Number(coin.priceUSD).toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
             })}
           </span>
           <span
@@ -107,7 +131,7 @@ const Top: React.FC = () => {
             }}
           >
             $
-            {Number(coin.marketCap).toLocaleString(undefined, {
+            {Number(coin.marketCapUSD).toLocaleString(undefined, {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             })}

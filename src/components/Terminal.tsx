@@ -51,6 +51,8 @@ interface AgentKey {
   price: string;
   marketCap: string;
   createdAtBlockTimestamp: string;
+  priceUSD: string;
+  marketCapUSD: string;
 }
 
 type Term = {
@@ -92,8 +94,11 @@ const Terminal = () => {
   const fetchTopData = async (limit: number) => {
     try {
       const API_KEY = "9421affaf21b1ad617a0bdee0e3ad815";
+      const SUBGRAPH_ID = "8f1XAvLcseuxGvme1EYCSCoRnpfDPa6D5jHB914gEM3L";
+      const API_URL = `https://gateway.thegraph.com/api/${API_KEY}/subgraphs/id/${SUBGRAPH_ID}`;
 
-      const query = `{
+      // İlk sorgu: Agent Keys
+      const agentKeysQuery = `{
         agentKeys(first: ${limit}, orderBy: marketCap, orderDirection: desc) {
           id
           name
@@ -105,25 +110,62 @@ const Terminal = () => {
         }
       }`;
 
-      const response = await fetch(
-        `https://gateway.thegraph.com/api/${API_KEY}/subgraphs/id/8f1XAvLcseuxGvme1EYCSCoRnpfDPa6D5jHB914gEM3L`,
+      // İkinci sorgu: ETH Price (farklı subgraph'ten)
+      const ethPriceResponse = await fetch(
+        `https://gateway.thegraph.com/api/${API_KEY}/subgraphs/id/HUZDsRpEVP2AvzDCyzDHtdc64dyDxx8FQjzsmqSg4H3B`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            query,
+            query: `{
+            bundles(first: 1) {
+              id
+              ethPriceUSD
+            }
+          }`,
             operationName: "Subgraphs",
             variables: {},
           }),
         }
       );
 
-      const data = await response.json();
-      if (data.errors) {
-        throw new Error(data.errors[0].message);
+      // Agent Keys verilerini çek
+      const agentKeysResponse = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          query: agentKeysQuery,
+          operationName: "Subgraphs",
+          variables: {},
+        }),
+      });
+
+      const agentKeysData = await agentKeysResponse.json();
+      const ethPriceData = await ethPriceResponse.json();
+
+      console.log("Agent Keys Data:", agentKeysData); // Debug için
+      console.log("ETH Price Data:", ethPriceData); // Debug için
+
+      if (agentKeysData.errors) {
+        throw new Error(agentKeysData.errors[0].message);
+      }
+      if (ethPriceData.errors) {
+        throw new Error(ethPriceData.errors[0].message);
       }
 
-      setTopData(data.data.agentKeys);
+      const ethPrice = Number(ethPriceData.data.bundles[0].ethPriceUSD);
+
+      // USD değerlerini hesaplıyoruz
+      const agentKeysWithUSD = agentKeysData.data.agentKeys.map(
+        (key: AgentKey) => ({
+          ...key,
+          priceUSD: (Number(key.price) * ethPrice).toString(),
+          marketCapUSD: (Number(key.marketCap) * ethPrice).toString(),
+        })
+      );
+
+      console.log("Processed Data:", agentKeysWithUSD); // Debug için
+      setTopData(agentKeysWithUSD);
     } catch (err) {
       console.error("Error fetching data:", err);
     }

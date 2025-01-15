@@ -1,3 +1,23 @@
-pnpm-lock.yaml
+# Dependencies
 node_modules
+pnpm-lock.yaml
+
+# Build outputs
+dist/
+
+# Media and static files
 *.mp3
+*.html
+*.ico
+*.png
+*.svg
+*.webmanifest
+public/*
+
+# Config files
+*.config.js
+*.config.ts
+
+# Include TypeScript files
+!*.ts
+!*.tsx
