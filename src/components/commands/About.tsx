@@ -8,11 +8,11 @@ const About: React.FC = () => {
   return (
     <AboutWrapper data-testid="about">
       <p>
-        Welcome to <HighlightSpan>BID.Terminal</HighlightSpan> - Your Cyberpunk
+        Welcome to <HighlightSpan>BID.Tensor</HighlightSpan> - Your Cyberpunk
         Trading Interface
       </p>
       <p>
-        BID.Terminal is{" "}
+        BID.Tensor is{" "}
         <HighlightAlt>a cutting-edge command-line interface</HighlightAlt>{" "}
         designed specifically for Creator.BID token traders and enthusiasts.
       </p>
@@ -32,7 +32,7 @@ const About: React.FC = () => {
       <p>
         Version: 1.0.0
         <br />
-        Created by: BID.Terminal Team
+        Created by: BID.Tensor Team
       </p>
     </AboutWrapper>
   );
