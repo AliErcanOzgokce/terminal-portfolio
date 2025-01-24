@@ -21,7 +21,7 @@ function App() {
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 10000); // 12 saniye olarak güncelledik (tüm animasyonun tamamlanması için)
+    }, 8000); // 12 saniye olarak güncelledik (tüm animasyonun tamamlanması için)
   }, []);
 
   // Disable browser's default behavior

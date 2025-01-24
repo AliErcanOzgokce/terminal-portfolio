@@ -18,10 +18,16 @@ const Welcome: React.FC = () => {
       <div className="info-section">
         <PreName>
           {` 
- __     __     __      __                           __                __ 
-|  |--.|__|.--|  |    |  |_ .-----..----..--------.|__|.-----..---.-.|  |
-|  _  ||  ||  _  | __ |   _||  -__||   _||        ||  ||     ||  _  ||  |
-|_____||__||_____||__||____||_____||__|  |__|__|__||__||__|__||___._||__|
+
+▀█████████▄   ▄█  ████████▄           ███        ▄████████ ███▄▄▄▄      ▄████████  ▄██████▄     ▄████████
+  ███    ███ ███  ███   ▀███      ▀█████████▄   ███    ███ ███▀▀▀██▄   ███    ███ ███    ███   ███    ███
+  ███    ███ ███▌ ███    ███         ▀███▀▀██   ███    █▀  ███   ███   ███    █▀  ███    ███   ███    ███
+ ▄███▄▄▄██▀  ███▌ ███    ███          ███   ▀  ▄███▄▄▄     ███   ███   ███        ███    ███  ▄███▄▄▄▄██▀
+▀▀███▀▀▀██▄  ███▌ ███    ███          ███     ▀▀███▀▀▀     ███   ███ ▀███████████ ███    ███ ▀▀███▀▀▀▀▀  
+  ███    ██▄ ███  ███    ███          ███       ███    █▄  ███   ███          ███ ███    ███ ▀███████████
+  ███    ███ ███  ███   ▄███          ███       ███    ███ ███   ███    ▄█    ███ ███    ███   ███    ███
+▄█████████▀  █▀   ████████▀          ▄████▀     ██████████  ▀█   █▀   ▄████████▀   ▀██████▀    ███    ███
+                                                                                               ███    ███
               
 
           `}
@@ -37,14 +43,14 @@ const Welcome: React.FC = () => {
           </PreNameMobile>
         </PreWrapper>
         <div>
-          Welcome to BID.Terminal - The Cyberpunk Trading Interface
+          Welcome to BID.Tensor - The Cyberpunk Trading Interface
           <Seperator>----</Seperator>
           Creator.BID Token's Official Terminal Interface. Built for degens, by
           degens.
           <Seperator>----</Seperator>
           Join the revolution:{" "}
           <Link
-            href="https://x.com/TerminalBid"
+            href="https://x.com/BidTensor"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -66,11 +72,11 @@ const Welcome: React.FC = () => {
           Type `<Cmd>help</Cmd>` to see available commands or try `
           <Cmd>top</Cmd>` to view top agents with{" "}
           <Link
-            href="https://creator.bid/agents/67449f1e853e3027a53168a2"
+            href="https://creator.bid/agents/675b3a0eba87b87ac56ba1d3"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Agent Algo
+            AION 5100
           </Link>
           .
           <Spacer />
@@ -105,29 +111,29 @@ const Welcome: React.FC = () => {
         </PreImg>
         <PreImgMobile>
           {`
-                                  ,##,,ee
-                                ,#########
-                            a###############@
-                          ^v7####^\`^"7W7^"@####
-                        &2w@#@b\`         ^@#@^#4?
-                            ##^`}
+                                                  ,##,,ee
+                                                ,#########
+                                            a###############@
+                                          ^v7####^\`^"7W7^"@####
+                                        &2w@#@b\`         ^@#@^#4?
+                                            ##^`}
           <PurpleSpan>,,,, ,,,,</PurpleSpan>
           {`^#^
-                            `}
+                                            `}
           <PurpleSpan>,,@######"#######=</PurpleSpan>
           {`
-                            `}
+                                            `}
           .<PurpleSpan>''555"\` '5555</PurpleSpan>b|
           {`
-                            T"@  ,,,^,mg,@,*
-                                %p||\`~~'.#\`
-                                ^Wp  ,#T
-                                :b''@@b^}
-                            ,^     \` 'b 3-
-                        .<\` 'p   ^v   #   b   *.
-                      {      }   #"GpGb   [
-                      C      3 * @#######Nl      \`
-                      '            ^@##b     ($    !`}
+                                            T"@  ,,,^,mg,@,*
+                                                %p||\`~~'.#\`
+                                                ^Wp  ,#T
+                                                :b''@@b^}
+                                            ,^     \` 'b 3-
+                                        .<\` 'p   ^v   #   b   *.
+                                      {      }   #"GpGb   [
+                                      C      3 * @#######Nl      \`
+                                      '            ^@##b     ($    !`}
         </PreImgMobile>
       </div>
     </HeroContainer>

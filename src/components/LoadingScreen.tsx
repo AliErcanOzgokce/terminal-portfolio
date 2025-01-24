@@ -12,11 +12,10 @@ const LoadingScreen = () => {
   const [showCursor, setShowCursor] = useState(true);
 
   const loadingLines = [
-    "Initializing system...",
     "Establishing connection...",
     "Loading AI agents...",
     "Access granted...",
-    "Welcome to CreatorBID Terminal",
+    "Welcome to BID Tensor",
   ];
 
   // Yanıp sönen cursor için

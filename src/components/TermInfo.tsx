@@ -5,7 +5,7 @@ const TermInfo = () => {
   return (
     <Wrapper>
       <TerminalPrompt>
-        <User>agent</User>@<WebsiteName>bid.terminal</WebsiteName>:~$
+        <User>agent</User>@<WebsiteName>bid.tensor</WebsiteName>:~$
       </TerminalPrompt>
     </Wrapper>
   );

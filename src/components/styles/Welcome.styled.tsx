@@ -27,7 +27,7 @@ export const HeroContainer = styled.div`
 export const PreName = styled.pre`
   margin-top: 0.5rem;
   margin-bottom: 1.5rem;
-  font-size: 0.85rem;
+  font-size: 0.65rem;
 
   @media (max-width: 550px) {
     display: none;
