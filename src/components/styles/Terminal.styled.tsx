@@ -102,3 +102,34 @@ export const TerminalPrompt = styled.span`
   color: ${({ theme }) => theme.colors?.text[100]};
   animation: ${brokenNeon} 3.8s infinite;
 `;
+
+export const MusicButton = styled.button`
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  color: ${({ theme }) => theme.colors?.primary};
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1000;
+  padding: 5px;
+  text-shadow: 0 0 7px ${({ theme }) => theme.colors?.primary},
+    0 0 10px ${({ theme }) => theme.colors?.primary},
+    0 0 21px ${({ theme }) => theme.colors?.primary};
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+
+  &:hover {
+    transform: scale(1.1);
+    text-shadow: 0 0 14px ${({ theme }) => theme.colors?.primary},
+      0 0 20px ${({ theme }) => theme.colors?.primary},
+      0 0 42px ${({ theme }) => theme.colors?.primary};
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+`;

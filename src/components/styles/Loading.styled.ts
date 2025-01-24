@@ -29,7 +29,7 @@ export const LoadingText = styled.div`
 
 export const HackerText = styled.div`
   font-family: "Courier New", Courier, monospace;
-  font-size: 0.6rem;
+  font-size: 0.9rem;
   opacity: 0.5;
   position: absolute;
   top: 0;

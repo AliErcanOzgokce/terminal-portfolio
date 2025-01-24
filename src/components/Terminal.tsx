@@ -29,6 +29,11 @@ type Command = {
 
 export const commands: Command = [
   // System Commands
+  { cmd: "trade", desc: "trade selected agents", tab: 8, category: "swap" },
+  { cmd: "analM", desc: "analyze market", tab: 8, category: "swap" },
+  { cmd: "analC", desc: "analyze contract", tab: 8, category: "swap" },
+  { cmd: "buy", desc: "buy agent", tab: 8, category: "swap" },
+  { cmd: "sell", desc: "sell agent", tab: 8, category: "swap" },
   { cmd: "clear", desc: "clear the terminal", tab: 8, category: "system" },
   { cmd: "echo", desc: "print out anything", tab: 9, category: "system" },
   { cmd: "help", desc: "check available commands", tab: 9, category: "system" },

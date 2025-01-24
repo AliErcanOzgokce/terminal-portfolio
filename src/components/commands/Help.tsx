@@ -17,7 +17,7 @@ const Help: React.FC = () => {
   return (
     <div>
       <div>
-        <Title>BID.Terminal Commands:</Title>
+        <Title>BID.Tensor Commands:</Title>
         {commands
           .filter(cmd => cmd.category === "bid")
           .map(({ cmd, desc, tab }) => (
@@ -29,6 +29,19 @@ const Help: React.FC = () => {
           ))}
       </div>
 
+      <Seperator>----</Seperator>
+      <div>
+        <Title>Swap Commands:</Title>
+        {commands
+          .filter(cmd => cmd.category === "swap")
+          .map(({ cmd, desc, tab }) => (
+            <Row key={cmd}>
+              <Cmd>{cmd}</Cmd>
+              <TabSpace tab={tab} />
+              <Description>{desc}</Description>
+            </Row>
+          ))}
+      </div>
       <Seperator>----</Seperator>
 
       <div>

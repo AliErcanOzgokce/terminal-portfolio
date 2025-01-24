@@ -58,7 +58,7 @@ const Welcome: React.FC = () => {
           </Link>{" "}
           |{" "}
           <Link
-            href="https://creator.bid/agents/67857c870e2b1c22e3e4890c"
+            href="https://creator.bid/agents/6789b794ab62ebec7df7a452"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -86,8 +86,8 @@ const Welcome: React.FC = () => {
         <PreImg>
           {`
                         ,##,,ee
-                      ,#########
-                   a###############@
+                      ,###BID###
+                   a#####TENSOR####@
                  ^v7####^\`^"7W7^"@####
                &2w@#@b\`         ^@#@^#4?
                    ##^`}
@@ -106,14 +106,14 @@ const Welcome: React.FC = () => {
                    ,^     \` 'b 3-
                .<\` 'p   ^v   #   b   *.
              {      }   #"GpGb   [
-             C      3 * @#######Nl      \`
+             C      3 * @##BID##Nl      \`
             '            ^@##b     ($    !`}
         </PreImg>
         <PreImgMobile>
           {`
                                                   ,##,,ee
-                                                ,#########
-                                            a###############@
+                                                ,###BID###
+                                            a######TENSOR####@
                                           ^v7####^\`^"7W7^"@####
                                         &2w@#@b\`         ^@#@^#4?
                                             ##^`}

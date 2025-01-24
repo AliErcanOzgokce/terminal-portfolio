@@ -4,6 +4,7 @@ import { useTheme } from "./hooks/useTheme";
 import GlobalStyle from "./components/styles/GlobalStyle";
 import Terminal from "./components/Terminal";
 import LoadingScreen from "./components/LoadingScreen";
+import { MusicButton } from "./components/styles/Terminal.styled";
 import backgroundMusic from "/src/assets/background.mp3";
 
 export const themeContext = createContext<
@@ -15,6 +16,7 @@ function App() {
   const { theme, themeLoaded, setMode } = useTheme();
   const [selectedTheme, setSelectedTheme] = useState(theme);
   const [isLoading, setIsLoading] = useState(true);
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   // Loading screen
@@ -57,6 +59,17 @@ function App() {
   const themeSwitcher = (switchTheme: DefaultTheme) => {
     setSelectedTheme(switchTheme);
     setMode(switchTheme);
+  };
+
+  const toggleMusic = () => {
+    if (audioRef.current) {
+      if (isMusicPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsMusicPlaying(!isMusicPlaying);
+    }
   };
 
   // Müzik kontrolü için useEffect
@@ -109,6 +122,9 @@ function App() {
       {themeLoaded && (
         <ThemeProvider theme={selectedTheme}>
           <GlobalStyle />
+          <MusicButton onClick={toggleMusic} aria-label="Toggle music">
+            {isMusicPlaying ? "[M:ON]" : "[M:OFF]"}
+          </MusicButton>
           {isLoading ? (
             <LoadingScreen />
           ) : (
